@@ -1,0 +1,50 @@
+import bungee_jumping as bj
+import matplotlib.pyplot as plt
+
+jump1 = bj.BungeeJumping()
+jump1.init(100,80,30,100.,0.,1)
+t,y = jump1.evolve(50)
+
+fig= plt.figure(figsize=(20,10))
+plt.plot(t,y,label="dt=0.001, Runge-Kutta")
+plt.xlabel('t [s]')
+plt.ylabel('y [m]')
+plt.title('y-t graf')
+plt.legend(loc="upper right")
+plt.savefig("bungee_jumping_noresistance.pdf")
+
+Ek, Ep, Eel, Etot = jump1.get_energy()
+plt.plot(t,Ek,label="kinetic energy")
+plt.plot(t,Ep,label="potential energy")
+plt.plot(t,Eel,label="elastic energy")
+plt.plot(t,Etot,label="total energy")
+plt.xlabel('t [s]')
+plt.ylabel('E [J]')
+plt.title('Energy conservation')
+plt.legend(loc="upper right")
+plt.savefig("energy_conservation_noresistance.pdf")
+
+
+jump2 = bj.BungeeJumping()
+jump2.init(100,80,30,100.,0.8,1)
+t2,y2 = jump2.evolve(50)
+
+fig2= plt.figure(figsize=(20,10))
+plt.plot(t2,y2,label="dt=0.001, Runge-Kutta")
+plt.xlabel('t [s]')
+plt.ylabel('y [m]')
+plt.title('y-t graf')
+plt.legend(loc="upper right")
+plt.savefig("bungee_jumping_resistance.pdf")
+
+Ek2, Ep2, Eel2, Etot2 = jump2.get_energy()
+plt.plot(t2,Ek2,label="kinetic energy")
+plt.plot(t2,Ep2,label="potential energy")
+plt.plot(t2,Eel2,label="elastic energy")
+plt.plot(t2,Etot2,label="total energy")
+plt.xlabel('t [s]')
+plt.ylabel('E [J]')
+plt.title('Energy conservation')
+plt.legend(loc="upper right")
+plt.savefig("energy_conservation_resistance.pdf")
+plt.show()
